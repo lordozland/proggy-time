@@ -25,7 +25,7 @@ request.onsuccess = function(event) {
 const request = indexedDB.open("library");
 let db;
 
-request.onupgradeneeded = function() {
+request.onupgradeneeded = function(e) {
   // The database did not previously exist, so create object stores and indexes.
   const db = request.result;
   const store = db.createObjectStore("books", {keyPath: "isbn"});
@@ -47,6 +47,11 @@ request.onsuccess = function() {
 request.onsuccess = function() {
     db = request.result;
 };
+
+function connectAB() {
+    console.log("hello B!")
+}
+window.onload()
 
 // export function useIndexedDb(databaseName, storeName, method, object) {
 //     return new Promise((resolve, reject) => {
