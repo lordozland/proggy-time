@@ -7,9 +7,8 @@ self.addEventListener('install', event => {
         './gotDB.js',
         './index.html',
         './style.css',
-        './assets/images/brandenburg.jpg',
-        './assets/images/reichstag.jpg',
-        './assets/images/map.jpg',
+        './icons/icon-192x192.png',
+        './icons/icon-512x512.png',
       ]);
     })
   );
