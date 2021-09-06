@@ -8,37 +8,37 @@
 
 // var windowVar = (/*...*/);
 
-// if (indexedDB) {
-//     console.log("IndexedDB is supported");
-// }
-// else {
-//     alert("Indexed DB is not supported!");
-// };
+if (indexedDB) {
+    console.log("IndexedDB is supported");
+}
+else {
+    alert("Indexed DB is not supported!");
+};
 
-var db;
-var request = indexedDB.open("MyTestDatabase");
-request.onerror = function(event) {
-  console.log("Why didn't you allow my web app to use IndexedDB?!");
-};
-request.onsuccess = function(event) {
-  db = event.target.result;
-};
+// var db;
+// var request = window.indexedDB.open("MyTestDatabase");
+// request.onerror = function(event) {
+//   console.log("Why didn't you allow my web app to use IndexedDB?!");
+// };
+// request.onsuccess = function(event) {
+//   db = event.target.result;
+// };
 
 // let db;
-// var request = indexedDB.open("industrialGrind");
+var request = indexedDB.open("industrialGrind");
 
 
-// // handlers
+// handlers
 
 
 
-// request.onerror = function(event) {
-//     console.log("dank");
-// };
+request.onerror = function(event) {
+    console.log("dank");
+};
 
-// request.onsuccess = function(event) {
-//     console.log("ohno!");
-// };
+request.onsuccess = function(event) {
+    console.log("ohno!");
+};
 
 
 
