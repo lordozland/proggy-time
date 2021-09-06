@@ -29,9 +29,9 @@ request.onerror = function(event) {
 
 request.onsuccess = function(event) {
     db = event.target.result;
-    // if (navigator.onLine) {
-    //     playerOneSave();
-    // }
+    if (navigator.onLine) {
+        playerSave();
+    }
   };
 
 function playerOneSave(record) {
@@ -39,6 +39,14 @@ function playerOneSave(record) {
     var playerStore = transaction.objectStore("saveGame");
     playerStore.add(record);
 }
+
+function playerSave() {
+    var transaction = db.transaction(["saveGame"], "readwrite");
+    var playerStore = transaction.objectStore("saveGame");
+    playerStore.add(record);
+}
+
+
 
 
 // transaction.oncomplete = function(event) {
