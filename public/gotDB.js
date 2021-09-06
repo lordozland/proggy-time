@@ -43,6 +43,11 @@ var request = indexedDB.open("industrialGrind");
 let db;
 var request = indexedDB.open("industrialGrind");
 
+request.onupgradeneeded = function(event) {
+    var db = event.target.result;
+    db.createObjectStore('getMonz', {autoIncrement: true})
+};
+
 request.onerror = function(event) {
     console.error("Database error: " + event.target.errorCode);
   };
@@ -54,16 +59,21 @@ request.onsuccess = function(event) {
     // }
   };
 
-request.onupgradeneeded = function(event) {
-    var db = event.target.result;
-    db.createObjectStore('getMonz', {autoIncrement: true})
-};
+
 
 transaction.oncomplete = function(event) {
     console.log("All done!");
   };
 
 window.addEventListener("onload", connectAB())
+
+var objectStore = transaction.objectStore("customers");
+customerData.forEach(function(customer) {
+  var request = objectStore.add(customer);
+  request.onsuccess = function(event) {
+    // event.target.result === customer.ssn;
+  };
+});
 
 // function connectAB() {
     //     console.log("hello B!");
