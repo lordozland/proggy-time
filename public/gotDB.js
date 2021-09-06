@@ -32,42 +32,40 @@ var request = indexedDB.open("industrialGrind");
 
 
 
-request.onerror = function(event) {
-    console.log("dank");
+// request.onerror = function(event) {
+//     console.log("dank");
+// };
+
+// request.onsuccess = function(event) {
+//     console.log("ohno!");
+// };
+
+
+
+request.onupgradeneeded = function(e) {
+  // The database did not previously exist, so create object stores and indexes.
+  const db = request.result;
+  const store = db.createObjectStore("books", {keyPath: "isbn"});
+  const titleIndex = store.createIndex("by_title", "title", {unique: true});
+  const authorIndex = store.createIndex("by_author", "author");
+
+  // Populate with initial data.
+  store.put({title: "Quarry Memories", author: "Fred", isbn: 123456});
+  store.put({title: "Water Buffaloes", author: "Fred", isbn: 234567});
+  store.put({title: "Bedrock Nights", author: "Barney", isbn: 345678});
+
+  console.log("here")
 };
 
-request.onsuccess = function(event) {
-    console.log("ohno!");
+request.onsuccess = function() {
+  db = request.result;
+  console.log("dank")
 };
 
 
+function connectAB() {
+    console.log("hello B!")
+}
 
-// request.onupgradeneeded = function(e) {
-//   // The database did not previously exist, so create object stores and indexes.
-//   const db = request.result;
-//   const store = db.createObjectStore("books", {keyPath: "isbn"});
-//   const titleIndex = store.createIndex("by_title", "title", {unique: true});
-//   const authorIndex = store.createIndex("by_author", "author");
-
-//   // Populate with initial data.
-//   store.put({title: "Quarry Memories", author: "Fred", isbn: 123456});
-//   store.put({title: "Water Buffaloes", author: "Fred", isbn: 234567});
-//   store.put({title: "Bedrock Nights", author: "Barney", isbn: 345678});
-
-//   console.log("here")
-// };
-
-// request.onsuccess = function() {
-//   db = request.result;
-// };
-
-// request.onsuccess = function() {
-//     db = request.result;
-// };
-
-// function connectAB() {
-//     console.log("hello B!")
-// }
-
-// window.onload(connectAB())
+window.onload(connectAB())
 
