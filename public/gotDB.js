@@ -4,91 +4,70 @@
 // https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API/Using_IndexedDB
 // https://www.w3.org/TR/IndexedDB/
 // https://www.youtube.com/watch?v=n4E4kjQIw6M
+// https://stackoverflow.com/questions/19609173/indexeddb-reference-error-db-is-not-defined
 
+// var windowVar = (/*...*/);
 
-var request = window.indexedDB.open("industrialGrind");
-let db;
+// if (indexedDB) {
+//     console.log("IndexedDB is supported");
+// }
+// else {
+//     alert("Indexed DB is not supported!");
+// };
 
-// handlers
-
-
-
+var db;
+var request = indexedDB.open("MyTestDatabase");
 request.onerror = function(event) {
-    console.log("dank");
+  console.log("Why didn't you allow my web app to use IndexedDB?!");
 };
-
 request.onsuccess = function(event) {
-    console.log("ohno!");
+  db = event.target.result;
 };
 
-  
-const request = indexedDB.open("library");
-let db;
+// let db;
+// var request = indexedDB.open("industrialGrind");
 
-request.onupgradeneeded = function(e) {
-  // The database did not previously exist, so create object stores and indexes.
-  const db = request.result;
-  const store = db.createObjectStore("books", {keyPath: "isbn"});
-  const titleIndex = store.createIndex("by_title", "title", {unique: true});
-  const authorIndex = store.createIndex("by_author", "author");
 
-  // Populate with initial data.
-  store.put({title: "Quarry Memories", author: "Fred", isbn: 123456});
-  store.put({title: "Water Buffaloes", author: "Fred", isbn: 234567});
-  store.put({title: "Bedrock Nights", author: "Barney", isbn: 345678});
+// // handlers
 
-  console.log("here")
-};
 
-request.onsuccess = function() {
-  db = request.result;
-};
 
-request.onsuccess = function() {
-    db = request.result;
-};
+// request.onerror = function(event) {
+//     console.log("dank");
+// };
 
-function connectAB() {
-    console.log("hello B!")
-}
-window.onload()
+// request.onsuccess = function(event) {
+//     console.log("ohno!");
+// };
 
-// export function useIndexedDb(databaseName, storeName, method, object) {
-//     return new Promise((resolve, reject) => {
-//     //   const request = window.indexedDB.open(databaseName, 1);
-//       let db,
-//         tx,
-//         store;
-  
-//       request.onupgradeneeded = function(e) {
-//         const db = request.result;
-//         db.createObjectStore(storeName, { keyPath: "_id" });
-//       };
-  
-//       request.onerror = function(e) {
-//         console.log("There was an error");
-//       };
-  
-//       request.onsuccess = function(e) {
-//         db = request.result;
-//         tx = db.transaction(storeName, "readwrite");
-//         store = tx.objectStore(storeName);
-  
-//         db.onerror = function(e) {
-//           console.log("error");
-//         };
-//         if (method === "put") {
-//           store.put(object);
-//         }
-//         if (method === "get") {
-//           const all = store.getAll();
-//           all.onsuccess = function() {
-//             resolve(all.result);
-//           };
-//         }
-//         tx.oncomplete = function() {
-//           db.close();
-//         };
-//       };
-//     });
-//   }
+
+
+// request.onupgradeneeded = function(e) {
+//   // The database did not previously exist, so create object stores and indexes.
+//   const db = request.result;
+//   const store = db.createObjectStore("books", {keyPath: "isbn"});
+//   const titleIndex = store.createIndex("by_title", "title", {unique: true});
+//   const authorIndex = store.createIndex("by_author", "author");
+
+//   // Populate with initial data.
+//   store.put({title: "Quarry Memories", author: "Fred", isbn: 123456});
+//   store.put({title: "Water Buffaloes", author: "Fred", isbn: 234567});
+//   store.put({title: "Bedrock Nights", author: "Barney", isbn: 345678});
+
+//   console.log("here")
+// };
+
+// request.onsuccess = function() {
+//   db = request.result;
+// };
+
+// request.onsuccess = function() {
+//     db = request.result;
+// };
+
+// function connectAB() {
+//     console.log("hello B!")
+// }
+
+// window.onload(connectAB())
+
