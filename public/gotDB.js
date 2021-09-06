@@ -1,6 +1,7 @@
 // let db;
 
 // https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API/Using_IndexedDB
+// https://developer.mozilla.org/en-US/docs/Web/API/IDBObjectStore/getAll
 // https://www.w3.org/TR/IndexedDB/
 // https://www.youtube.com/watch?v=n4E4kjQIw6M
 // https://stackoverflow.com/questions/19609173/indexeddb-reference-error-db-is-not-defined
@@ -43,7 +44,8 @@ function playerOneSave(record) {
 function playerSave() {
     var transaction = db.transaction(["saveGame"], "readwrite");
     var playerStore = transaction.objectStore("saveGame");
-    playerStore.add(record);
+    var allScorz = playerStore.getAll();
+    console.log(allScorz.result);
 }
 
 
