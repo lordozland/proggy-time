@@ -1,6 +1,5 @@
 // let db;
 
-
 // https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API/Using_IndexedDB
 // https://www.w3.org/TR/IndexedDB/
 // https://www.youtube.com/watch?v=n4E4kjQIw6M
@@ -15,30 +14,6 @@ else {
     alert("Indexed DB is not supported!");
 };
 
-// var db;
-// var request = window.indexedDB.open("MyTestDatabase");
-// request.onerror = function(event) {
-//   console.log("Why didn't you allow my web app to use IndexedDB?!");
-// };
-// request.onsuccess = function(event) {
-//   db = event.target.result;
-// };
-
-// let db;
-var request = indexedDB.open("industrialGrind");
-
-
-// handlers
-
-
-
-// request.onerror = function(event) {
-//     console.log("dank");
-// };
-
-// request.onsuccess = function(event) {
-//     console.log("ohno!");
-// };
 
 let db;
 var request = indexedDB.open("industrialGrind");
@@ -55,15 +30,20 @@ request.onerror = function(event) {
 request.onsuccess = function(event) {
     db = event.target.result;
     // if (navigator.onLine) {
-    //     function();
+    //     playerOneSave();
     // }
   };
 
+function playerOneSave(record) {
+    var transaction = db.transaction(["saveGame"], "readwrite");
+    var playerStore = transaction.objectStore("saveGame");
+    playerStore.add(record);
+}
 
 
-transaction.oncomplete = function(event) {
-    console.log("All done!");
-  };
+// transaction.oncomplete = function(event) {
+//     console.log("All done!");
+//   };
 
 window.addEventListener("onload", connectAB())
 
@@ -74,35 +54,4 @@ customerData.forEach(function(customer) {
     // event.target.result === customer.ssn;
   };
 });
-
-// function connectAB() {
-    //     console.log("hello B!");
-    
-    //     request.onupgradeneeded = function(event) {
-    //         // The database did not previously exist, so create object stores and indexes.
-    //         const db = event.target.result;
-    //         db.createObjectStore('getMonz', {autoIncrement: true})
-            
-    //         // const store = db.createObjectStore("books", {keyPath: "isbn"});
-    //         // const titleIndex = store.createIndex("by_title", "title", {unique: true});
-    //         // const authorIndex = store.createIndex("by_author", "author");
-          
-    //         // // Populate with initial data.
-    //         // store.put({title: "Quarry Memories", author: "Fred", isbn: 123456});
-    //         // store.put({title: "Water Buffaloes", author: "Fred", isbn: 234567});
-    //         // store.put({title: "Bedrock Nights", author: "Barney", isbn: 345678});
-          
-    //         console.log("here")
-    //       };
-    
-      
-    //     request.onsuccess = function(event) {
-    //         db = event.target.result;
-    //         console.log("dank")
-    //     };
-    
-    //     request.onerror = function(event) {
-    //         console.log("unfortunate");
-    //     };
-    // }
 
