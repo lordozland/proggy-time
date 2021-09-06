@@ -45,7 +45,10 @@ function playerSave() {
     var transaction = db.transaction(["saveGame"], "readwrite");
     var playerStore = transaction.objectStore("saveGame");
     var allScorz = playerStore.getAll();
-    console.log(allScorz.result);
+
+    allScorz.onsuccess = function() {
+        console.log(allScorz.result);
+    }
 }
 
 
@@ -55,13 +58,13 @@ function playerSave() {
 //     console.log("All done!");
 //   };
 
-window.addEventListener("onload", connectAB())
+// window.addEventListener("onload", connectAB())
 
-var objectStore = transaction.objectStore("customers");
-customerData.forEach(function(customer) {
-  var request = objectStore.add(customer);
-  request.onsuccess = function(event) {
-    // event.target.result === customer.ssn;
-  };
-});
+// var objectStore = transaction.objectStore("customers");
+// customerData.forEach(function(customer) {
+//   var request = objectStore.add(customer);
+//   request.onsuccess = function(event) {
+//     // event.target.result === customer.ssn;
+//   };
+// });
 
