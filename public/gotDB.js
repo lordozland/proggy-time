@@ -43,34 +43,56 @@ var request = indexedDB.open("industrialGrind");
 let db;
 var request = indexedDB.open("industrialGrind");
 
+request.onerror = function(event) {
+    console.error("Database error: " + event.target.errorCode);
+  };
 
-function connectAB() {
-    console.log("hello B!");
+request.onsuccess = function(event) {
+    db = event.target.result;
+    // if (navigator.onLine) {
+    //     function();
+    // }
+  };
 
-    request.onupgradeneeded = function(event) {
-        // The database did not previously exist, so create object stores and indexes.
-        const db = event.target.result;
-        db.createObjectStore('getMonz', {autoIncrement: true})
-        
-        // const store = db.createObjectStore("books", {keyPath: "isbn"});
-        // const titleIndex = store.createIndex("by_title", "title", {unique: true});
-        // const authorIndex = store.createIndex("by_author", "author");
-      
-        // // Populate with initial data.
-        // store.put({title: "Quarry Memories", author: "Fred", isbn: 123456});
-        // store.put({title: "Water Buffaloes", author: "Fred", isbn: 234567});
-        // store.put({title: "Bedrock Nights", author: "Barney", isbn: 345678});
-      
-        console.log("here")
-      };
+request.onupgradeneeded = function(event) {
+    var db = event.target.result;
+    db.createObjectStore('getMonz', {autoIncrement: true})
+};
 
-  
-    request.onsuccess = function(event) {
-        db = event.target.result;
-        console.log("dank")
-    };
-}
+transaction.oncomplete = function(event) {
+    console.log("All done!");
+  };
 
 window.addEventListener("onload", connectAB())
 
+// function connectAB() {
+    //     console.log("hello B!");
+    
+    //     request.onupgradeneeded = function(event) {
+    //         // The database did not previously exist, so create object stores and indexes.
+    //         const db = event.target.result;
+    //         db.createObjectStore('getMonz', {autoIncrement: true})
+            
+    //         // const store = db.createObjectStore("books", {keyPath: "isbn"});
+    //         // const titleIndex = store.createIndex("by_title", "title", {unique: true});
+    //         // const authorIndex = store.createIndex("by_author", "author");
+          
+    //         // // Populate with initial data.
+    //         // store.put({title: "Quarry Memories", author: "Fred", isbn: 123456});
+    //         // store.put({title: "Water Buffaloes", author: "Fred", isbn: 234567});
+    //         // store.put({title: "Bedrock Nights", author: "Barney", isbn: 345678});
+          
+    //         console.log("here")
+    //       };
+    
+      
+    //     request.onsuccess = function(event) {
+    //         db = event.target.result;
+    //         console.log("dank")
+    //     };
+    
+    //     request.onerror = function(event) {
+    //         console.log("unfortunate");
+    //     };
+    // }
 
