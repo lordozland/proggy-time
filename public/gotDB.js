@@ -36,18 +36,20 @@ request.onsuccess = function(event) {
   };
 
 function playerOneSave(record) {
-    var transaction = db.transaction(["saveGame"], "readwrite");
-    var playerStore = transaction.objectStore("saveGame");
+    var transaction = db.transaction('saveGame', 'readwrite');
+    var playerStore = transaction.objectStore('saveGame');
     playerStore.add(record);
 }
 
 function playerSave() {
-    var transaction = db.transaction(["saveGame"], "readwrite");
-    var playerStore = transaction.objectStore("saveGame");
+    var transaction = db.transaction('saveGame', 'readwrite');
+    var playerStore = transaction.objectStore('saveGame');
     var allScorz = playerStore.getAll();
 
     allScorz.onsuccess = function() {
-        console.log(allScorz.result);
+        if(allScorz.result.length > 0) {
+            fetch("/api/transaction")
+        }
     }
 }
 
@@ -58,7 +60,7 @@ function playerSave() {
 //     console.log("All done!");
 //   };
 
-// window.addEventListener("onload", connectAB())
+window.addEventListener("onload", playerSave())
 
 // var objectStore = transaction.objectStore("customers");
 // customerData.forEach(function(customer) {
