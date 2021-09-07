@@ -49,7 +49,7 @@ function playerSave() {
 
     allScorz.onsuccess = function () {
         if(allScorz.result.length > 0) {
-            fetch("/api/transaction", {
+            fetch("/api/transaction/", {
                 method: POST,
                 body: JSON.stringify(allScorz.results),
                 headers: {
