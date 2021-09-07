@@ -60,6 +60,15 @@ function playerSave() {
             .then((response) => {
                 return response.json();
             })
+            .then(() => {
+                var transaction = db.transaction(['saveGame'], 'readwrite');
+                var playerStore = transaction.objectStore('saveGame');
+                playerStore.clear();
+                console.log("here");
+            })
+            .catch((err) => {
+                console.log(err);
+            });
         }
     }
 }
@@ -71,7 +80,7 @@ function playerSave() {
 //     console.log("All done!");
 //   };
 
-window.addEventListener("online", playerSave)
+window.addEventListener('online', playerSave)
 
 // var objectStore = transaction.objectStore("customers");
 // customerData.forEach(function(customer) {
