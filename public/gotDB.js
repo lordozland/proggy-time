@@ -47,7 +47,7 @@ function playerSave() {
     var playerStore = transaction.objectStore('saveGame');
     var allScorz = playerStore.getAll();
 
-    allScorz.onsuccess = function() {
+    allScorz.onsuccess = function () {
         if(allScorz.result.length > 0) {
             fetch("/api/transaction", {
                 method: POST,
@@ -71,7 +71,7 @@ function playerSave() {
 //     console.log("All done!");
 //   };
 
-window.addEventListener("online", playerSave())
+window.addEventListener("online", playerSave)
 
 // var objectStore = transaction.objectStore("customers");
 // customerData.forEach(function(customer) {
