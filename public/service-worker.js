@@ -28,7 +28,8 @@ self.addEventListener("fetch", function(evt) {
   // cache successful requests to the API
   if (evt.request.url.includes("/api/")) {
     evt.respondWith(
-      caches.open(DATA_CACHE_NAME).then(cache => {
+      caches.open(DATA_CACHE_NAME)
+      .then((cache) => {
         return fetch(evt.request)
           .then(response => {
             // If the response was good, clone it and store it in the cache.
@@ -38,11 +39,11 @@ self.addEventListener("fetch", function(evt) {
 
             return response;
           })
-          .catch(err => {
+          .catch((err) => {
             // Network request failed, try to get it from the cache.
             return cache.match(evt.request);
           });
-      }).catch(err => console.log(err))
+      }).catch((err) => console.log(err))
     );
 
     return;
@@ -51,11 +52,22 @@ self.addEventListener("fetch", function(evt) {
   // if the request is not for the API, serve static assets using "offline-first" approach.
   // see https://developers.google.com/web/fundamentals/instant-and-offline/offline-cookbook#cache-falling-back-to-network
   evt.respondWith(
-    caches.match(evt.request).then(function(response) {
+    caches.match(evt.request).then(function (response) {
       return response || fetch(evt.request);
     })
   );
 });
+
+// self.addEventListener('fetch', function (event) {
+//   event.respondWith(
+//     caches.open('mysite-dynamic').then(function (cache) {
+//       return fetch(event.request).then(function (response) {
+//         cache.put(event.request, response.clone());
+//         return response;
+//       });
+//     }),
+//   );
+// });
 
 // self.addEventListener('fetch', event => {
 //   event.respondWith(
