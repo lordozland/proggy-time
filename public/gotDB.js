@@ -5,6 +5,7 @@
 // https://www.w3.org/TR/IndexedDB/
 // https://www.youtube.com/watch?v=n4E4kjQIw6M
 // https://stackoverflow.com/questions/19609173/indexeddb-reference-error-db-is-not-defined
+// https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
 
 // var windowVar = (/*...*/);
 
@@ -48,7 +49,10 @@ function playerSave() {
 
     allScorz.onsuccess = function() {
         if(allScorz.result.length > 0) {
-            fetch("/api/transaction")
+            fetch("/api/transaction", {
+                method: POST,
+                body: JSON.stringify(allScorz.results)
+            })
         }
     }
 }
