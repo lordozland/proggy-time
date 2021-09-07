@@ -51,7 +51,11 @@ function playerSave() {
         if(allScorz.result.length > 0) {
             fetch("/api/transaction", {
                 method: POST,
-                body: JSON.stringify(allScorz.results)
+                body: JSON.stringify(allScorz.results),
+                headers: {
+                    Accept: 'application/json, text/plain, */*',
+                    'Content-Type': 'application/json',
+                },
             })
         }
     }
