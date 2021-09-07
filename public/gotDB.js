@@ -7,7 +7,7 @@ else {
 
 
 
-var request = indexedDB.open("industrialGrind");\
+var request = indexedDB.open("industrialGrind");
 let db;
 
 request.onupgradeneeded = function(event) {
